@@ -1,34 +1,3 @@
-# -*- coding: utf-8 -*-
-"""
-Deep Learning Reinforcement Tutorial: Deep Q Network (DQN) = Combination of Deep Learning and Q-Learning Tutorial
-
-The class developed in this file implements the Deep Q Network (DQN) Reinforcement Learning Algorithm.
-The implementation is based on the OpenAI Gym Cart Pole environment and TensorFlow (Keras) machine learning library
-
-The webpage explaining the codes and the main idea of the DQN is given here:
-
-https://aleksandarhaber.com/deep-q-networks-dqn-in-python-from-scratch-by-using-openai-gym-and-tensorflow-reinforcement-learning-tutorial/
-
-
-Author: Aleksandar Haber 
-Date: February 2023
-
-Tested on:
-
-tensorboard==2.11.2
-tensorboard-data-server==0.6.1
-tensorboard-plugin-wit==1.8.1
-tensorflow==2.11.0
-tensorflow-estimator==2.11.0
-tensorflow-intel==2.11.0
-tensorflow-io-gcs-filesystem==0.30.0
-
-keras==2.11.0
-
-gym==0.26.2
-
-"""
-# import the necessary libraries
 import numpy as np
 import random
 from tensorflow.keras.layers import Dense
@@ -38,13 +7,7 @@ from collections import deque
 from tensorflow import gather_nd
 from tensorflow.keras.losses import mean_squared_error 
 
-
-
 class DeepQLearning:
-    
-    ###########################################################################
-    #   START - __init__ function
-    ###########################################################################
     # INPUTS: 
     # env - Cart Pole environment
     # gamma - discount rate
@@ -99,23 +62,14 @@ class DeepQLearning:
         # predicted and true sample matrices in order to form the loss
         self.actionsAppend=[]
     
-    ###########################################################################
-    #   END - __init__ function
-    ###########################################################################
-    
-    ###########################################################################
     # START - function for defining the loss (cost) function
     # INPUTS: 
-    #
     # y_true - matrix of dimension (self.batchReplayBufferSize,2) - this is the target 
     # y_pred - matrix of dimension (self.batchReplayBufferSize,2) - this is predicted by the network
-    # 
     # - this function will select certain row entries from y_true and y_pred to form the output 
     # the selection is performed on the basis of the action indices in the list  self.actionsAppend
     # - this function is used in createNetwork(self) to create the network
-    #
     # OUTPUT: 
-    #    
     # - loss - watch out here, this is a vector of (self.batchReplayBufferSize,1), 
     # with each entry being the squared error between the entries of y_true and y_pred
     # later on, the tensor flow will compute the scalar out of this vector (mean squared error)
@@ -124,7 +78,6 @@ class DeepQLearning:
     def my_loss_fn(self,y_true, y_pred):
         
         s1,s2=y_true.shape
-        #print(s1,s2)
         
         # this matrix defines indices of a set of entries that we want to 
         # extract from y_true and y_pred
